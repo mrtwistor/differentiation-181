@@ -1,0 +1,172 @@
+\documentclass[10pt]{report}
+% Originally compiled by Carl Lutzer
+% email: carl.lutzer@rit.edu
+
+% Packages
+\usepackage{hieroglf,linearb}
+\usepackage{hyperref}
+        \hypersetup{
+        	colorlinks,
+        	citecolor=black,
+        	filecolor=black,
+        	linkcolor=blue,
+        	urlcolor=blue
+        	}
+\usepackage{pgf}
+\usepackage{titling}
+\usepackage{enumerate}
+\usepackage{units}
+\usepackage{scalefnt}
+\usepackage{nicefrac}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsbsy}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\usepackage{fancyhdr}
+\usepackage{rotating}
+\usepackage{sectsty}
+\usepackage[normalem]{ulem}
+\usepackage{boites, boites_exemples}
+\usepackage{multicol}
+\usepackage{polynom}
+\usepackage{esint}
+\usepackage{tikz}
+    \usetikzlibrary{decorations.pathmorphing}
+    \usetikzlibrary{decorations.pathreplacing}
+    \usetikzlibrary{decorations.shapes}
+    \usetikzlibrary{decorations.markings}
+    \usetikzlibrary{positioning}
+    \usetikzlibrary{shapes.geometric}
+\usepackage{tikzsymbols}
+
+% Mathematical Sets 
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+% Ordinal modifiers
+\newcommand{\st}{^{\mbox{\scriptsize st}}}
+\newcommand{\nd}{^{\mbox{\scriptsize nd}}}
+\newcommand{\rd}{^{\mbox{\scriptsize rd}}}
+\renewcommand{\th}{^{\mbox{\scriptsize th}}}
+
+% Environments
+\newcommand{\beq}{\begin{equation}}
+\newcommand{\eeq}{\end{equation}}
+\newcommand{\be}{\begin{enumerate}}
+\newcommand{\ee}{\end{enumerate}}
+\newcommand{\bt}{\begin{tikzpicture}}
+\newcommand{\et}{\end{tikzpicture}}
+\newcommand{\bi}{\begin{itemize}}
+\newcommand{\ei}{\end{itemize}}
+\newcommand{\bc}{\begin{center}}
+\newcommand{\ec}{\end{center}}
+\newcommand{\bmc}[1]{\vspace*{-2 mm}\begin{multicols}{#1}}
+\newcommand{\mbc}[1]{\vspace*{-2 mm}\begin{multicols}{#1}}
+\newcommand{\emc}{\end{multicols}\vspace*{-2 mm}}
+\newcommand{\mec}{\end{multicols}\vspace*{-2 mm}}
+
+% Other commands
+\renewcommand{\epsilon}{\varepsilon}
+\newcounter{pitem} % "p" for pause, and item for \item
+\newcommand{\pitem}[1]{\setcounter{pitem}{\theenumi}\end{enumerate} #1 \begin{enumerate}\setcounter{enumi}{\thepitem} }
+\newcommand{\ppitem}[1]{\setcounter{pitem}{\theenumii}\end{enumerate} #1 \begin{enumerate}\setcounter{enumii}{\thepitem} }
+\newcommand{\topic}[1]{\phantomsection\underline{\large\sffamily #1}\addcontentsline{toc}{section}{#1}}
+\newcommand{\leftdef}{ \stackrel{\mbox{\tiny def}} {\raisebox{1pt}{\mbox{\scriptsize :}}\hspace*{-3pt}=}}
+\newcommand{\worksheet}[1]{\newpage \bc {\Huge\sffamily #1}\addcontentsline{toc}{section}{#1}\\ \rule{\textwidth}{1 pt} \ec}
+
+
+% Page style 
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\headwidth}{6 in}
+\fancyfoot[L,E]{\scriptsize Rochester Institute of Technology } %\rule{1.5 mm}{1.5 mm} 
+\fancyfoot[c,E]{\scriptsize \today}
+\fancyfoot[R,E]{\scriptsize \thepage}
+
+% Document Setting
+\topmargin -1 in            % adj top margin from 1"
+\textwidth 7 in              % width of printed area
+\textheight 10 in             % height of printed area
+\oddsidemargin 0 in      % Lt Margin adj for odd pages (0 = 1" margin)
+\evensidemargin 0 in     % Rt Margin adjustment for even pages
+\marginparwidth 0 in
+\marginparsep 24 pt
+\hoffset -35 pt
+\setlength{\unitlength}{.7 cm}
+
+
+\begin{document} 
+\thispagestyle{empty}
+\noindent{\Large ``Ancient Egyptian algebra''}\vspace{12pt}
+
+{\bf Deliverable:}  The entire worksheet will be {\em graded}.  Submit work on a {\bf separate sheet}.  {\bf Any work that does not strictly follow the {\em Laws of Horus} will be marked as zero, unless it is extremely amusing.}  {\bf Penmanship counts.}  Take care to be neat, since the hieroglyphs are difficult to draw sometimes.  
+
+{\bf Instructional objectives:}  You will learn to apply some -- seemingly arbitrary -- computational rules on expressions.  These rules will later be adapted to describe the computation of differentials.
+
+{\bf Title source:} Futurama (April 27, 1999) {\em A Fishful of Dollars}, \href{https://vimeo.com/60696810}{https://vimeo.com/60696810}
+
+%\def\x{\text{\pmglyph{\HI}}}
+%\def\y{\text{\pmglyph{\HY}}}
+\def\x{\textlinb{\BPwoman}}
+\def\y{\textlinb{\BPman}}
+\def\a{{\tt a}}
+%\def\d{\text{\raisebox{-3pt}{\pmglyph{\Hibw}}\!\!}}
+\def\d{\text{\reflectbox{\raisebox{-3pt}{\pmglyph{\Hibw}}\!\!}}}
+
+{\em {\bf The Laws of Horus.}} $\x$ and $\y$ denote any expressions, made out of atomic variables $x$, $y$, $z$, constant numbers like $e,1,2,\pi,i,\a$, etc, arithmetic operations of addition, division, multiplication, exponentiation, and unary transcendental functions ($\sin,\cos,\tan,\arctan,\arcsin,\ln$)  Also $\a$ is a constant.  The Symbol of the Ibis, $\d\,$, is an operator that takes expressions to expressions, and satisfies the following Laws:
+
+\begin{enumerate}[{\bf L{a}w 1.}]
+%\item Chain rule: If $v=f(u)$, then $dv=f'(u)du$
+\item $\d\left(\x^\y\right) = \x^\y\left(\ln(\x)\d\left(\y\right) + \frac{\y}{\x}\d\left(\x\right)\right)$
+
+  In the special case when $\y=\a$ is constant,
+  $\d\left(\x^\a\right) = \a\x^{\a-1}\d\left(\x\right)$
+\item $\d(\a\cdot\x)=\a\cdot\,\d\left(\x\right)$
+\item $\d\left(\x+\y\right)=\d\left(\x\right)+\d\left(\y\right)$
+\item $\d(\a)=0$
+\item $\d(\x\y) = \y\,\d\left(\x\right) + \x\,\d\left(\y\right)$
+\item $\displaystyle \d\left(\frac{\x}{\y}\right)=\frac{\y\,\d\left(\x\right) - \x\,\d\left(\y\right)}{\y^2}$
+\item $\d\left(\sin \x\right) = \left(\cos\x\right)\,\d\left(\x\right),\qquad \d\left(\cos\x\right) = -\left(\sin\x\right)\,\d\left(\x\right)$
+%\item $\d\left(\tan \x\right) = \left(\sec^2\x\right)\,\d\left(\x\right)$
+\item $\d\left(\ln\x\right) = \frac{\d\left(\x\right)}{\x}$
+\item $\displaystyle \d\left(\arctan\x\right) = \frac{\d\left(\x\right)}{1+\x^2},\qquad \d\left(\arcsin \x\right) = \frac{\d\left(\x\right)}{\sqrt{1-\x^2}}$
+\end{enumerate}
+
+
+Once $\d$ reaches an atomic variable, it does not simplify further: e.g., $\d(x) = \d\!\!\!x$.  We say in that case that the bird has found the food, and we leave the bird together with its food as a single bird-with-food symbol, $\d\!\!\!x,\d\!\!\!y,$ etc.
+
+For example,
+\begin{align*}
+  \d(x^3+4)^{27} &= 27 (x^3+4)^{26}\d (x^3+4)&\text{Law 1 with $\x=x^3+4$ and $\a=27$}\\
+                 &= 27 (x^3+4)^{26}(\d (x^3)+\d(4))&\text{Law 3}\\
+                 &= 27 (x^3+4)^{26}\cdot 3x^2\d\!\!\! x&\text{Law 1 with $\x=x^3$ and $\a=3$ (and Law 4)}
+\end{align*}
+
+Use the {\em Laws of Horus} to simplify the following, so that the bird gets the food.  Apply one law per step, and cite each law as you go.
+\begin{multicols}{2}
+  \begin{enumerate}[{\bf 1.}]
+\item $\d(x^3)$
+  \vspace{.5cm}
+\item $\d\left(ye^x\right)$
+  \vspace{.5cm}
+\item 
+  $\d (x^2 + 1)$
+  \vspace{.5cm}
+\item
+  $\d \left(x\cos(x^2+1)\right)$
+  \vspace{.5cm}
+\item
+  $\d \left(\frac{\cos(x^2+1)}{(x^3+4)^{27}}\right)$
+\item
+  $\d \left(x^2+y^2\right)$
+\end{enumerate}
+\end{multicols}
+\end{document}
+
+
